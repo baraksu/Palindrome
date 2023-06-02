@@ -1,10 +1,8 @@
- Project name: Palindrome
-Name: Tsuriel
-Grade: 10
-Teacher name: BARAK TZUBERY
-School name: Givat Shmuel
-
-# *table of contents*
+ #Project name: Palindrome
+Name: Tsuriel  
+Grade: 10  
+Teacher name: BARAK TZUBERY  
+School name: Givat Shmuel  
 
 # what does the program do? 
 ## things that the user can do: 
