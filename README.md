@@ -1,4 +1,4 @@
-Project name: Palindrome
+  Project name: Palindrome
 Name: Tsuriel
 Grade: 10
 Teacher name: TSUBARY
