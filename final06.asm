@@ -15,6 +15,24 @@ msg8 db 13,10,'enter any other character to end the string. $'
 msg9 db 13,10,'your string: $'
 msg10 db 13,10,'the reversed string is: $'  
 msg11 db 13,10,'the string is empty please enter a new one: $'
+top1 db 13,10,' -------                                         '
+top2 db 13,10,'|       \                   _____                     '
+top3 db 13,10,'|  ---  |   _____   _____  /  __ \                        _        '
+top4 db 13,10,'| |   | |  /  __/  /     \ | |__||              ____  ___| |___           '
+top5 db 13,10,'|  --- _/ |  /    /  ___  \ \__   \     ____   /  __||___  ___|                 ' 
+top6 db 13,10,'| ____/   | |     | |___| |    \   |   / _  \ |  /       | |                       '
+top7 db 13,10,'| |       | |     |       |     |  |  | |_| | | |        | |                         '
+top8 db 13,10,'|_|       |_|      \_____/      |  |  |  __/  |  \__     | |__                        '
+top9 db 13,10,'                                |  |  | |      \____|     \__/                      '
+topa db 13,10,'                            ___/  /   |  \___                                     '
+topb db 13,10,'                           |_____/     \____/      __    _____                         ____    ____        '
+topc db 13,10,'________              _   _  | __ \    | |        |  |  /     |   ____    ___         / _  |  / __ \    '
+topd db 13,10,'|  ---  |   _____    | | |_| | | \ \   | |        |  | |  ___/   /    \  |   \       / / | | | |__|| '
+tope db 13,10,'| |   | |  / __ |    | |  _  | |  \ \  | |        |  | |  |     |  __  | | |\ \     / /  | | | ____/     '
+topf db 13,10,'|  --- _/ | /  ||    | | | | | |   \ \ | |  ______|  | |  |     | |  | | | | \ \   / /   | | | |         ' 
+topg db 13,10,'| ____/   | |__||    | | | | | |    \ \| |  |  ___   | |  |     | |  | | | |  \ \_/ /    | | | |         '
+toph db 13,10,'| |       |_____ \   | | | | | |     \   |  | |___|  | |  |     | |__| | | |   \   /     | | | |___          '
+topi db 13,10,'|_|             \_|  |_| |_| |_|      \__|  |________| |__|      \____/  |_|    \_/      |_| \_____|    $'
 
 .CODE
 
@@ -65,7 +83,10 @@ je c
 
 jmp menue ;if there's no correct option it asks again.
 B:
+mov ax, [l]
+push ax
 call reversing: 
+pop ax
          
 jmp menue
 
@@ -121,16 +142,16 @@ pop bp
 ret 2
 endp getstring           
 
-proc reversing:   ;reverse the last string and display the new one.  
+proc reversing:   ;reverse the last string and display the new one.  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     
-mov cx, [l]
-mov bp, sp
 
+mov bp, sp
+mov cx, [bp + 2] ;was L
 LEA DX, MSG10  ;DISPLAY MSG10. 
 MOV AH, 09
 INT 21H
 printing:
-mov dx, [bp + 2]
+mov dx, [bp + 4]
 mov ah, 2
 int 21h
 add bp, 2
@@ -138,25 +159,30 @@ add bp, 2
 dec cx
 loop printing:
 MOV BP, SP
-MOV CX, [L]
+MOV CX, [bp + 2] ;was L
 mov si, bp
 add si, cx
 sub si, 2
 mov [t], 0
 REVERSE:
 add [t], 2
-mov ax, [bp + 2]
+mov ax, [bp + 4]
 mov bx, bp
 mov bp, si
-mov dx, [bp + 2]
+mov dx, [bp + 4]
 
-mov [bp + 2], ax
+mov [bp + 4], ax
 mov bp, bx
-mov [bp + 2], dx
+mov [bp + 4], dx
+;;;;;;;;;;   promblem zone
+push bp
 mov bx, [t]
 add bx, [t]
-cmp bx, [l]
+mov bp, sp
+cmp bx, [bp + 4]  ;was L
+pop bp
 jae afterreverse
+;;;;;;;;;;
 sub si, 2
 add bp, 2
 
@@ -177,7 +203,7 @@ add si, cx
 
 
 palindrome:
-
+                                                                                                                 
 mov ax, [bp + 2]     ;ax is holding the chek letter from first to last.
 mov bx, bp
 mov bp, si
@@ -215,7 +241,14 @@ endp palindromecheck:
 
 START:
 MOV AX, @DATA
-MOV DS, AX 
+MOV DS, AX
+
+MOV AH, 09
+LEA DX, top1   
+INT 21H
+
+ 
 call getstring:
 
-END START                              
+END START                                                                                                     
+

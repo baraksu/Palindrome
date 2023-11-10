@@ -1,10 +1,8 @@
-Project name: Palindrome
-Name: Tsuriel
-Grade: 10
-Teacher name: TSUBARY
-School name: Givat Shmuel
-
-# *table of contents*
+ #Project name: Palindrome
+Name: Tsuriel  
+Grade: 10  
+Teacher name: BARAK TZUBERY  
+School name: Givat Shmuel  
 
 # what does the program do? 
 ## things that the user can do: 
@@ -59,4 +57,4 @@ string showing option.
 it felt good to finish the project
 in the reverse part I had to fix it more than several times
 for it to work and I felt bad and anxious
- so it felt so good to finally be done.
+ so it felt so good to finally be done.  
